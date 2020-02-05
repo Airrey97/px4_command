@@ -269,8 +269,8 @@ void pos_controller_cascade_PID::_velocityController
     thrust_desired_Y  = _Reference_State.acceleration_ref[1] + vel_P_output[1] + thurst_int[1] + vel_D_output[1];
 
     // Get maximum allowed thrust in XY based on tilt angle and excess thrust.
-    float thrust_max_XY_tilt = fabs(thrust_sp[2]) * tanf(tilt_max/180.0*M_PI);
-    float thrust_max_XY = sqrtf(MPC_THR_MAX * MPC_THR_MAX - thrust_sp[2] * thrust_sp[2]);
+    float thrust_max_XY_tilt = fabs(thrust_sp[2]) * tanf(tilt_max/180.0*M_PI); //根据最大倾角计算出的水平方向上的最大推力
+    float thrust_max_XY = sqrtf(MPC_THR_MAX * MPC_THR_MAX - thrust_sp[2] * thrust_sp[2]); //在满足Z轴方向期望推力的前提下电机能够在水平方向提供的最大推力
     thrust_max_XY = min(thrust_max_XY_tilt, thrust_max_XY);
 
     // Saturate thrust in XY-direction.
